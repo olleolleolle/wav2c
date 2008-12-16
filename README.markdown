@@ -1,5 +1,11 @@
-Name:      wave2c, a WAV file to GBA C source converter.
-Purpose:   translate audio binaries into AVR memory data
+wave2c, a WAV file to GBA C source converter
+============================================
+
+Translates audio binaries into AVR memory data.
+
+Credits
+-------
+ 
 Author:    Ino Schlaucher (ino@blushingboy.org)
 Created:   2008-07-28
 Copyright: 2008 Ino Schlaucher (http://blushingboy.org)
@@ -24,9 +30,13 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+How-To
+------
 
-== How-To ==
+1. use Audacity to create the file with the right settings: 8KHz, 8bit, mono. Do it with WAV export.
+1. Audacity will always leave a tail, making the file suck big time. Therefore trim it with: sox fifiu.wav fifiu-cut.wav trim 0 10000s
+1. Export it to text with: ./wav2c fifiu-cut.wav fifiu.h sounddata
 
-1) use Audacity to create the file with the right settings: 8KHz, 8bit, mono. Do it with WAV export.
-2) Audacity will always leave a tail, making the file suck big time. Therefore trim it with: sox fifiu.wav fifiu-cut.wav trim 0 10000s
-3) Export it to text with: ./wav2c fifiu-cut.wav fifiu.h sounddata
+[Audacity](http://audacity.sourceforge.net/): Free Audio Editor and Recorder
+
+[SoX: Sound Exchange](http://sox.sourceforge.net/)
