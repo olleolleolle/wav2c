@@ -7,8 +7,11 @@ Credits
 -------
  
 Author:    Ino Schlaucher (ino@blushingboy.org)
+
 Created:   2008-07-28
+
 Copyright: 2008 Ino Schlaucher (http://blushingboy.org)
+
 License:   GPLv3 (upgrading previous version)
 
 Based on an original piece of code by Mathieu Brethes.
