@@ -6,18 +6,17 @@ Translates audio binaries into AVR memory data.
 Credits
 -------
  
-Author:    Ino Schlaucher (ino@blushingboy.org)
+Author:    Ino Schlaucher <ino@blushingboy.org>
 
 Created:   2008-07-28
 
-Copyright: 2008 Ino Schlaucher (http://blushingboy.org)
+Copyright: 2008 Ino Schlaucher [blushingboy.org](http://blushingboy.org)
 
 License:   GPLv3 (upgrading previous version)
 
 Based on an original piece of code by Mathieu Brethes.
 
-Copyright (c) 2003 by Mathieu Brethes <thieumsweb@free.fr>
-Website : http://thieumsweb.free.fr/
+Copyright (c) 2003 by Mathieu Brethes <thieumsweb@free.fr> [thieumsweb.free.fr](http://thieumsweb.free.fr/) 
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
