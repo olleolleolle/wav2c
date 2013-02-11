@@ -59,7 +59,7 @@ int main(int argc, char **argv) {
             saveWave(fin, s, fout, argv[3]);
             break;
         case 5:
-            saveWave_(fin, s, fout, argv[3], (int)argv[4]);
+            saveWave_(fin, s, fout, argv[3], atoi(argv[4]));
             break;
         default:
             break;
