@@ -35,9 +35,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 How-To
 ------
 
-1. use Audacity to create the file with the right settings: 8KHz, 8bit, mono. Do it with WAV export.
-1. Audacity will always leave a tail, making the file suck big time. Therefore trim it with: sox fifiu.wav fifiu-cut.wav trim 0 10000s
-1. Export it to text with: ./wav2c fifiu-cut.wav fifiu.h sounddata
+1. Use Audacity to create the file with the right settings: 8KHz, 8bit, mono. Do it with WAV export.
+2. Audacity will always leave a tail, making the file suck big time. Therefore trim it with: `sox fifiu.wav fifiu-cut.wav trim 0 10000s`
+3. Compile wav2c with usual `make`
+4. Export it to text with: `./wav2c fifiu-cut.wav fifiu.h sounddata`
+
+Links
+-----
 
 [Audacity](http://audacity.sourceforge.net/): Free Audio Editor and Recorder
 
