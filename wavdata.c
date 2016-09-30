@@ -241,10 +241,11 @@ void saveWave_(FILE * fpI, wavSound *s, FILE * fpO, char * name, int MaxSamples)
 	/** PATCHED FOR ARDUINO **/
 	else {
 		fprintf(fpO, "const signed char %s_data[] PROGMEM ={", name);
+		/* 8-bit ? convert 0-255 to -128-127 */
 		if (s->bitsPerSample == 8) {
 			for (i = 0 ; i < realLength ; i++) {
 				fread(&stuff8, sizeof(unsigned char), 1, fpI);
-				fprintf(fpO, "%d, ", stuff8);
+				fprintf(fpO, "%d, ", -128 + stuff8);
 				if ((i % 20) == 0) fprintf(fpO, "\n");
 			}
 			fprintf(fpO, "};\n");
