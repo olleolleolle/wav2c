@@ -163,6 +163,13 @@ wavSound * loadWaveHeader(FILE * fp) {
 void saveWave(FILE * fpI, wavSound *s, FILE * fpO, char * name) {
     saveWave_(fpI, s, fpO, name, -1);
 }
+
+#define DATA_ARRAY_STRING_FORMAT "const signed char %s_data[]={"
+#define DATA_ARRAY_STRING_FORMAT_ARDUINO_SIGNED "const int8_t %s_dataR[]={"
+#define DATA_ARRAY_STRING_FORMAT_ARDUINO_UNSIGNED "const uint8_t %s_dataR[]={"
+#define DATA_LENGTH_STRING_FORMAT "const size_t %s_length = %d;\n\n"
+
+
 void saveWave_(FILE * fpI, wavSound *s, FILE * fpO, char * name, int MaxSamples) {
 	long filepos;
 	int i;
@@ -182,11 +189,11 @@ void saveWave_(FILE * fpI, wavSound *s, FILE * fpO, char * name, int MaxSamples)
     if (MaxSamples != -1 && realLength > MaxSamples)
         realLength = MaxSamples;
 
-	fprintf(fpO, "const int %s_length = %d;\n\n", name, realLength);
+	fprintf(fpO, DATA_LENGTH_STRING_FORMAT, name, realLength);
 
 	/* Is it a stereo file ? */
 	if (s->numChannels == 2) {
-		fprintf(fpO, "const signed char %s_dataL[]= {", name);
+		fprintf(fpO, DATA_ARRAY_STRING_FORMAT, name);
 		/* 8-bit ? convert 0-255 to -128-127 */
 		if (s->bitsPerSample == 8) {
 			for (i = 0 ; i < realLength ; i++) {
@@ -199,7 +206,7 @@ void saveWave_(FILE * fpI, wavSound *s, FILE * fpO, char * name, int MaxSamples)
 			// reset file position;
 			fseek(fpI, filepos, SEEK_SET);
 			fprintf(fpO, "};\n\n");
-			fprintf(fpO, "const signed char %s_dataR[]={", name);
+			fprintf(fpO, DATA_ARRAY_STRING_FORMAT, name);
 			for (i = 0 ; i < realLength ; i++) {
 				// read left output and forget about it
 				fread(&stuff8, sizeof(unsigned char), 1, fpI);
@@ -224,7 +231,7 @@ void saveWave_(FILE * fpI, wavSound *s, FILE * fpO, char * name, int MaxSamples)
 			// reset file position;
 			fseek(fpI, filepos, SEEK_SET);
 			fprintf(fpO, "};\n\n");
-			fprintf(fpO, "const signed char %s_dataR[]={", name);
+			fprintf(fpO, DATA_ARRAY_STRING_FORMAT, name);
 			for (i = 0 ; i < realLength ; i++) {
 				// read left output and forget about it
 				fread(&stuff8, sizeof(char), 1, fpI);
@@ -240,8 +247,8 @@ void saveWave_(FILE * fpI, wavSound *s, FILE * fpO, char * name, int MaxSamples)
 	/* Monaural file */
 	/** PATCHED FOR ARDUINO **/
 	else {
-		fprintf(fpO, "const signed char %s_data[] PROGMEM ={", name);
 		if (s->bitsPerSample == 8) {
+			fprintf(fpO, DATA_ARRAY_STRING_FORMAT_ARDUINO_UNSIGNED, name);
 			for (i = 0 ; i < realLength ; i++) {
 				fread(&stuff8, sizeof(unsigned char), 1, fpI);
 				fprintf(fpO, "%d, ", stuff8);
@@ -249,6 +256,7 @@ void saveWave_(FILE * fpI, wavSound *s, FILE * fpO, char * name, int MaxSamples)
 			}
 			fprintf(fpO, "};\n");
 		} else {
+			fprintf(fpO, DATA_ARRAY_STRING_FORMAT_ARDUINO_SIGNED, name);
 			for (i = 0 ; i < realLength ; i++) {
 				fread(&stuff8, sizeof(char), 1, fpI);
 				fread(&stuff8, sizeof(char), 1, fpI);
