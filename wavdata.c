@@ -31,6 +31,7 @@
 
 #include "wavdata.h"
 #include <stdlib.h>
+#include <string.h>
 
 /* Loads a wave header in memory, and checks for its validity. */
 /* returns NULL on error, a malloced() wavSound* otherwise.    */
